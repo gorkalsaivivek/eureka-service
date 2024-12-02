@@ -42,5 +42,5 @@ jobs:
       env:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
-        docker build -t gcr.io/$GOOGLE_PROJECT/eurekaservice:latest .
-        docker push gcr.io/$GOOGLE_PROJECT/eurekaservice:latest
+        docker build -t gcr.io/$GOOGLE_PROJECT/microservices/eurekaservice:latest .
+        docker push gcr.io/$GOOGLE_PROJECT/microservices/eurekaservice:latest
