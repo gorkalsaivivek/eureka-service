@@ -33,10 +33,14 @@ jobs:
       with:
         project_id: ${{ secrets.GOOGLE_PROJECT }}
 
-    - name: build and push the docker image
+    
+    - name: Authenticate Docker with GCR
+      run: |
+        gcloud auth configure-docker gcr.io
+
+    - name: Build and push the Docker image to GCR
       env:
         GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
       run: |
-        gcloud auth configure-docker us-central1-docker.pkg.dev
-        docker build -t us-central1-docker.pkg.dev/$GOOGLE_PROJECT/microservices/eurekaservice:latest .
-        docker push us-central1-docker.pkg.dev/$GOOGLE_PROJECT/microservices/eurekaservice:latest
+        docker build -t gcr.io/$GOOGLE_PROJECT/eurekaservice:latest .
+        docker push gcr.io/$GOOGLE_PROJECT/eurekaservice:latest
